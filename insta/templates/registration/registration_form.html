@@ -1,0 +1,21 @@
+{%extends "registration/base.html"%}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<body class="container">
+{% comment %} <div>
+        <h3 class="text-center">Register here!</h3>
+</div> {% endcomment %}
+  <div style="background-color:#e2e3d1 ; box-shadow:3px 3px 3px 3px 20px solid black; padding-left:150px;margin-left:120px;margin-top:20px;padding-bottom:20px;padding-top:20px;margin-bottom:30px;;margin-right:120px">
+      <form action="" method="post" novalidate>
+          {% csrf_token%}
+          {{ form|crispy}}
+          <button type="submit" class="btn btn-outline-primary btn-sm">Sign up</button>
+          <hr>
+      </form>
+
+      <p>Have an account? <a href="{% url 'login' %}">Log in</a></p>
+  </div>
+  <body>
+{% endblock %}

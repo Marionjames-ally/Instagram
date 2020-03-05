@@ -1,0 +1,35 @@
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<div class="home" style="margin-top:5px;">
+<div class="row">
+    <div class="col-md-4" style="margin-left: 270px; margin-top:30px;">
+        <div style="background-image:url('https://www.instagram.com/static/images/homepage/home-phones.png/43cc71bb1b43.png');background-repeat:no-repeat; height:618px; background-size:contain;">
+        <img src="https://www.instagram.com/static/images/homepage/screenshot1.jpg/d6bf0c928b5a.jpg" style="margin-top:83px;margin-left:140px;width:240px;">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card" style="margin-top:70px; width:350px;">
+            <div>
+                <h3 class="card-title text-center"><img src="https://logo-logos.com/wp-content/uploads/2016/10/Instagram_logo_wordmark_logotype.png" width="200rem" style="padding-top:10px;"></h3>
+                 <div class="card-body mb-3 mr-3 ml-3">
+                <p class="text-center">Sign up to see photos and videos from your friends.</p>
+                <hr>
+                <p class="text-center" ><a href="{% url 'signup' %}" class="btn btn-outline-info text-center"> sign up</a></p>
+                <hr>
+                <p class="card-text">By signing up, you agree to our Terms <span style="color:#e32095;">, Data Policy</span> and<span style="color:#e32095;"> Cookies Policy .</span></p>
+                </div>
+            </div>
+        </div>
+        <br>
+    <div class="card" style="padding-top:10px; width:350px;">
+        <p class="card-title text-center">Have an account already ? <a href="{% url 'login' %}">Log in</a></p>
+    </div>
+        
+    </div>
+</div>
+</div>
