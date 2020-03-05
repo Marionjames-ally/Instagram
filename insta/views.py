@@ -23,7 +23,7 @@ def signup(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
-            signin(request, user)
+            signin(request)
             return redirect('/signup')
         else:
             return render(request, 'registration/registration_form.html', {'form': form})
@@ -32,18 +32,18 @@ def signup(request):
         return render(request, 'registration/registration_form.html', {'form': form})
 
 def signin(request):
-    # if request.user.is_authenticated:
-    #     return render(request, 'insta-templates/instagram.html')
+    if request.user.is_authenticated:
+        return render(request, 'insta-templates/instagram.html')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, password1=password)
         if user is not None:
             login(request, user)
             return redirect('/instagram')
         else:
             form = AuthenticationForm(request.POST)
-            return render(request, 'registration/login.html', {'form': form})
+            return render(request, 'insta-templates/instagram.html', {'form': form})
     else:
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
