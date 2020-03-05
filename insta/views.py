@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate,login  
+from django.contrib.auth import authenticate,login ,logout 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -9,28 +9,13 @@ from .forms import *
 def home(request):
     return render (request, 'home.html')
 
-@login_required(login_url='login')
+@login_required(login_url='signup')
 def instagram(request):
     return render(request, 'insta-templates/instagram.html')
 
-
-# def signup(request):
-#     if request.method == 'POST':
-#         form = SignUpForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get('username')
-#             raw_password = form.cleaned_data.get('password1')
-#             user = authenticate(username=username, password=raw_password)
-#             login(request, user)
-#             return redirect('home')
-#     else:
-#         form = SignUpForm()
-#     return render(request, 'registration/registration_form.html', {'form': form})
-
 def signup(request):
     if request.user.is_authenticated:
-        return redirect('/instagram')
+        return redirect('signup')
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -38,8 +23,8 @@ def signup(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('/instagram')
+            signin(request, user)
+            return redirect('/signup')
         else:
             return render(request, 'registration/registration_form.html', {'form': form})
     else:
@@ -47,8 +32,8 @@ def signup(request):
         return render(request, 'registration/registration_form.html', {'form': form})
 
 def signin(request):
-    if request.user.is_authenticated:
-        return render(request, 'instagram/')
+    # if request.user.is_authenticated:
+    #     return render(request, 'insta-templates/instagram.html')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -62,3 +47,10 @@ def signin(request):
     else:
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
+
+def signout(request):
+    if request.method == "POST":
+        logout(request)
+
+        return redirect('home')
+   

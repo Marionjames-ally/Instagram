@@ -3,31 +3,32 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-<div class="container">
+<div class="container" style=" margin-left:330px;" >
   <div class="row">
-    <!-- Empty div -->
-    <div class="col-md-4"></div>
     <div class="col-md-4">
       {% if form.errors %}
         <p> Password or Username is incorrect </p>
       {% endif %}
-      <div class="card">
-<div class="card-body">
-<h4 class="card-title">Log in to your account</h4>
+      <div class="card" style="width:600px;padding-top:50px;padding-bottom:50px;margin-top:100px;background-color:#e2e3d1 ;">
+          <div class="card-body">
+          <h4 class="card-title text-center">Log in to your account</h4>
 
-<form method="post">
-{% csrf_token %}
-<input type="hidden" name="next" value="{{ next }}">
+          <form method="post" class="text-center"  >
+          {% csrf_token %}
+          <input type="hidden"  name="next" value="{{ next }}">
 
-{{ form|crispy }}
+          {{ form|crispy }}
+          <br>
 
-<button type="submit" class="btn btn-primary btn-block">Log in</button>
-</form>
-</div>
-</div>
+          <button type="submit" class="btn btn-outline-primary text-center">Log in</button>
+          <hr>
+          <br>
+              <p>Have an account already? <a href="{% url 'signup'%}">signup</a></p>
+
+          </form>
+          </div>
+      </div>
     </div>
-    <!-- empty div -->
-    <div class="col-md-4"></div>
   </div>
 </div>
 

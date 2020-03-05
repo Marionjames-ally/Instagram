@@ -1,7 +1,8 @@
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
 <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="{% url 'instagram' %}"><img src="https://cdn2.iconfinder.com/data/icons/instagram-ui/48/jee01-10-128.png" width="70rem"></a>
+        <a class="navbar-brand" href="{% url 'instagram' %}"><img src="https://cdn1.iconfinder.com/data/icons/instagram-ui-glyph/48/Sed-20-128.png" width="70rem"></a>
       </div>
         <form class="navbar-form" role="search">        
 
@@ -15,13 +16,22 @@
         </form>
 
       <!-- Adding a search form  -->
-      <div class="col-sm-4 col-md-4">
-        <img src="https://cdn0.iconfinder.com/data/icons/web-seo-and-advertising-media-1/512/197_Home_Instagram_Interface-512.png" width="28rem" style="margin-right:20px;">
-        <img src="https://icons-for-free.com/iconfiles/png/512/discover+people+explore+instagram+icon-1320184028081333128.png" width="28rem" style="margin-right:20px;">
-        <img src="https://cdn2.iconfinder.com/data/icons/instagram-ui/48/jee-68-128.png" width="40rem" style="margin-right:20px;">
+      <div class="col-sm-4 col-md-4" style="display:flex;float:right;">
+          <img class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://cdn1.iconfinder.com/data/icons/instagram-ui-glyph/48/Sed-01-128.png" width="70rem" style="">
+                <div class="dropdown-menu dropdown-menu-center dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                    <a class="dropdown-item" >profile</a>
+                    <a class="dropdown-item" href="{% url 'signout' %}">Log out</a>
+                </div> 
+          {% comment %} <img src="https://cdn1.iconfinder.com/data/icons/instagram-ui-glyph/48/Sed-04-128.png" width="40rem" style="margin-right:20px;"> {% endcomment %}
+          {% comment %} <img src="https://cdn1.iconfinder.com/data/icons/instagram-ui-glyph/48/Sed-06-128.png" width="40rem" style="margin-right:20px;"> {% endcomment %}
+          
+          </div>
+               
       </div>
+      
+              
+      
      
-      </div>
       <!-- search form end -->
     </div>
   </nav>
