@@ -31,4 +31,8 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
+class Image(models.Model):
+    image = CloudinaryField('image')
+    name = models.CharField(max_length=30)
+    caption = models.CharField(max_length=100)
 
