@@ -3,27 +3,30 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container" style="margin-top:8%">
+<div class="container" style="margin-top:0%">
     <div class="content-section">
         <div class="media">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-6 mt-3">
-                        <div class="media-body">
-                            <div class="account-heading"><span class="mr-3 text-secondary username">{{ user.username }}</span>
-                                <a class="btn btn-sm btn-outline-secondary mr-3" data-toggle="modal" data-target=".bd-example-modal-md"><strong>Edit Profile</strong></a>
-                                <a class="mt-3" data-toggle="modal" data-target="#ModalCenter"><i class="fa fa-cog mt-3" id="cog"></i></a>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div style="margin-right:50px;">
+                                <img width="200px" height="auto" src="{{user.profile.profile_picture.url}}" width="200rem" style="box-shadow:3px 3px 3px 10px solid black;">
                             </div>
-
-                            <div class="post-details mt-3 mb-3">
-                                <span class="mr-5"><strong>{{images.count}}</strong> Posts</span>
-                                <span class="mr-5"> <strong>{{ user.profile.followers.count }}</strong> followers</span>
-                                <span class="mr-5"> <strong>{{ user.profile.following.count }}</strong> following</span>
+                            <div class="col-md-6">
+                                <div class="row" width="800px">
+                                    <p class="mr-3" style="margin-right:20px;">{{ user.username }}</p>
+                                    <p style="margin-right:20px;" class="btn mr-3 btn-sm btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-md">Edit Profile</p>
+                                    <a class="mr-3" style="margin-right:20px;" data-toggle="modal" data-target="#ModalCenter"><i  class="fa fa-cog mt-3" id="cog" ></i></a>
+                                </div>
+                                <hr>
+                                <div class="row" width="600px">
+                                    <p class="mr-8" style="margin-right:40px;">{{images.count}}  Posts</p>
+                                    <p class="mr-8" style="margin-right:30px;"> {{ user.profile.following.count }} following</p>
+                                    <p class="mr-8" style="margin-right:30px;">{{ user.profile.followers.count }} followers</p>
+                                </div>
+                                <h5>{{ user.profile.name }}</h5>
+                                <p class="text-secondary">{{ user.profile.bio }}</p>
                             </div>
-                            <h5>{{ user.profile.name }}</h5>
-                            <p class="text-secondary">{{ user.profile.bio }}</p>
-                        </div>
                     </div>
                 </div>
             </div>

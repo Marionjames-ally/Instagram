@@ -35,4 +35,32 @@ class Profile(models.Model):
 
     def delete_profile(self):
         self.delete()
+class Caption(models.Model):
+    image = CloudinaryField('image')
+    name = models.CharField(max_length=250, blank=True)
+    caption = models.CharField(max_length=250, blank=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True, )
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE,default="user", related_name='posts')
+    created = models.DateTimeField(auto_now_add=True, null=True)
 
+    class Meta:
+        ordering = ["-pk"]
+
+    # def get_absolute_url(self):
+    #     return f"/post/{self.id}"
+
+    @property
+    def get_all_comments(self):
+        return self.comments.all()
+
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
+
+    def total_likes(self):
+        return self.likes.count()
+
+    def __str__(self):
+        return f'{self.user.name} Caption'

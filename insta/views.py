@@ -49,7 +49,6 @@ def signin(request):
         return render(request, 'registration/login.html', {'form': form})
 
 def signout(request):
-    if request.method == "POST":
         logout(request)
 
         return redirect('home')
@@ -80,3 +79,4 @@ def profile(request):
     }
 
     return render(request, 'registration/profile.html',locals())
+
