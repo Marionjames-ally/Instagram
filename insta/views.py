@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login ,logout 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponseRedirect
 from .models import *
 from .forms import *
 
@@ -80,3 +81,23 @@ def profile(request):
 
     return render(request, 'registration/profile.html',locals())
 
+@login_required(login_url='login')
+def index(request):
+    captions = Caption.objects.all()
+    users = User.objects.exclude(id=request.user.id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user.profile
+            post.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = PostForm()
+    params = {
+        'captions': captions,
+        'form': form,
+        'users': users,
+
+    }
+    return render(request, 'all-pics/index.html', params)
