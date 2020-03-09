@@ -1,6 +1,111 @@
-{% extends "insta-templates/base.html" %}
-{%block content%}
+{% extends 'insta-templates/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
 {{block.super}}
-<div class="container">
+<div class="container" style="margin-top:7%;">
+     <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
+            <div class="row">
+                <button class="btn btn-sm btn-outline-success ml-4 mb-3" data-toggle="modal" data-target="#Upload">
+                    Add New Image
+                </button>
+                <div class="modal fade" id="Upload" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">New Image</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="post" enctype="multipart/form-data" novalidate>
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <button class="btn btn-sm btn-outline-success">Upload</button>
+                                    <button type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% for caption in captions %}
+            <div class="card mb-4">
+                <div class="card-title">
+                    <img src="{{caption.user.profile_picture.url}}" class="rounded-circle border ml-3 mt-2  mr-3" alt="{{caption.user.user.username}}" width="35" height="35">
+                    <a href="{% url 'user_profile' caption.user.user.username  %}" class="mt-4 user" style="text-decoration:none; color:black">{{caption.user.user.username|title}}</a>
+                </div>
+                <div class="card-body mb-4">
+                    <a href="{% url 'comment' caption.id %}">
+                        <div class="card-text" style="background-image:url({{ caption.image.url }});background-size: contain;position: sticky;">
+                            <img src="{{caption.image.url}}" style="" class="card-img" width="100%"/>
+                        </div>
+                    </a>
+                </div>
+                <div class="iconic ml-2">
+                    <button class="btn btn-sm" type="submit" name="image_id" value="{{caption.id}}">
+                        <a href=""><i class="far fa-heart hearticon mx-auto"
+                                                                  aria-hidden="true" style=""></i></a>
+                    </button>
+
+                    <button class="btn btn-sm" type="submit"><a href="{% url 'comment' caption.id %}"><i
+                            class="far fa-comment hearticon mx-auto" aria-hidden="true"></i>
+                    </a></button>
+                </div>
+                <span class="ml-4 mb-1"><strong>{{caption.likes.count}} like{{caption.likes.count|pluralize}}</strong></span>
+                <span class="text-secondary ml-4 viewall"><a href="{% url 'comment' caption.id %}">view all {{caption.comments.count}} comments{{image.comments.count|pluralize}}</a></span>
+                <div class="allcomments mb-4">
+                    {% for comment in caption.comments.all|slice:'2' %}
+                    <div class="comment">
+                        <div class="ml-4"><strong>{{ comment.user.user.username }}</strong> <span
+                                class="text-secondary">{{ comment.comment }}</span>
+                        </div>
+                    </div>
+                    {% empty %}
+                    {% endfor %}
+                    <p class="text-secondary ml-4">{{caption.created|timesince}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-4 mt-4 userinfo">
+            <div class="row">
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="card mt-4 mr-2 ml-2">
+                        <div class="card-title text-secondary mt-2 mr-2 ml-2 ">Suggestions</div>
+                        {% for user in users %}
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-2 mr-3 mt-1 mb-2">
+                                    <img class="rounded-circle" src="{{ user.profile.profile_picture.url }}"
+                                         width="45px" height="45px">
+                                </div>
+                                <div class="col-md-6 mr-2 mt-2">
+                                    <span><a href="{% url 'user_profile' user.username  %}">{{user.username}}</a></span>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+
+        </div>
+
+    </div>
 </div>
-{%endblock%}
+{% endblock %}

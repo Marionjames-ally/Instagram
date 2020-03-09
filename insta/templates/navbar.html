@@ -17,16 +17,18 @@
 
       <!-- Adding a search form  -->
       <div class="col-sm-4 col-md-4" style="display:flex;float:right;">
-          <img class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://cdn1.iconfinder.com/data/icons/instagram-ui-glyph/48/Sed-01-128.png" width="70rem" style="">
+      
+            {% if user.is_authenticated %}
+              <img class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://cdn1.iconfinder.com/data/icons/instagram-ui-glyph/48/Sed-01-128.png" width="70rem" style="">
                 <div class="dropdown-menu dropdown-menu-center dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
                     <a href="{%url 'profile' %}" class="dropdown-item" >profile</a>
                     <a class="dropdown-item" href="{% url 'signout' %}">Log out</a>
                 </div> 
           {% comment %} <img src="https://cdn1.iconfinder.com/data/icons/instagram-ui-glyph/48/Sed-04-128.png" width="40rem" style="margin-right:20px;"> {% endcomment %}
           {% comment %} <img src="https://cdn1.iconfinder.com/data/icons/instagram-ui-glyph/48/Sed-06-128.png" width="40rem" style="margin-right:20px;"> {% endcomment %}
-          
+        
           </div>
-               
+        {%endif%}
       </div>
       
               
