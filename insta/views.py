@@ -100,7 +100,7 @@ def profile(request):
     return render(request, 'registration/profile.html',locals())
 
 @login_required(login_url='login')
-def post_comment(request, id):
+def post_comment(request, id, pk):
     image = get_object_or_404(Caption, pk=id)
     is_liked = False
     if image.likes.filter(id=request.user.id).exists():

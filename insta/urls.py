@@ -10,5 +10,5 @@ urlpatterns = [
     path('',views.home, name='home'),
     path('', views.signout, {"next_page": '/'},name="signout"),
     path('profile/', views.profile,name = "profile"), 
-    path('comment/',views.post_comment,name = 'comment')
+    path('comment/<int:pk>/',views.post_comment,name = 'comment')
 ]
