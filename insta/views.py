@@ -122,4 +122,4 @@ def post_comment(request, id):
         'is_liked': is_liked,
         'total_likes': image.total_likes()
     }
-    return render(request, 'all-pics/post.html', params)
+    return render(request, 'insta-templates/post.html', params)
