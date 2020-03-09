@@ -36,6 +36,10 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
+    def search_profile(self,username):
+        users = User.objects.filter(username=username)
+        return users
+
 class Caption(models.Model):
     image = CloudinaryField('image')
     name = models.CharField(max_length=250, blank=True)
@@ -76,3 +80,10 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ["-pk"]
+
+class Follow(models.Model):
+    follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='following')
+    followed = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='followers')
+
+    def __str__(self):
+        return f'{self.follower} Follow'

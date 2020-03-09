@@ -123,3 +123,40 @@ def post_comment(request, id):
         'total_likes': image.total_likes()
     }
     return render(request, 'insta-templates/comment.html', params)
+
+@login_required(login_url='login')
+def search_profile(request):
+    if 'user' in request.GET and request.GET['username']:
+        search_term = request.GET.get("username")
+        message = f"{search_term}"
+
+        searched_profile = User.search_profile(search_term)
+        searched_user = User.objects.filter(username=User)[0]
+        return render(request,'insta-templates/search.html')
+    else:
+         message=''   
+    return render(request, 'insta-templates/search.html', {'message':message})
+    
+
+@login_required(login_url='login')
+def user_profile(request, username):
+    user_prof = get_object_or_404(User, username=username)
+    if request.user == user_prof:
+        return redirect('profile')
+    user_posts = user_prof.profile.posts.all()
+    
+    followers = Follow.objects.filter(followed=user_prof.profile)
+    follow_status = None
+    for follower in followers:
+        if request.user.profile == follower.follower:
+            follow_status = True
+        else:
+            follow_status = False
+    params = {
+        'user_prof': user_prof,
+        'user_posts': user_posts,
+        'followers': followers,
+        'follow_status': follow_status
+    }
+    print(followers)
+    return render(request, 'all-pics/user-profile.html', params)
