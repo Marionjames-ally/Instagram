@@ -38,9 +38,9 @@
             </div>
 
             {% for caption in captions %}
-            <div class="card mb-4">
+            <div class="card mb-6">
                 <div class="card-title">
-                    <img src="{{caption.user.profile_picture.url}}" class="rounded-circle border ml-3 mt-2  mr-3" alt="{{caption.user.user.username}}" width="35" height="35">
+                    <img src="{{caption.user.profile_picture.url}}" class="rounded-circle border ml-3 mt-2  mr-3"  width="35" height="35"> : <p>{{caption.user.user.username}}</p>
                     {% comment %} <a href="{% url 'uprofile' caption.user.user.username  %}" class="mt-4 user" style="text-decoration:none; color:black">{{caption.user.user.username|title}}</a> {% endcomment %}
                 </div>
                 <div class="card-body mb-4">
@@ -51,16 +51,15 @@
                 </div>
                 <div class="iconic ml-2">
                     <button class="btn btn-sm" type="submit" name="image_id" value="{{caption.id}}">
-                        <a href=""><i class="far fa-heart hearticon mx-auto" aria-hidden="true" style=""></i></a>
+                        <a class="btn btn-outline-success" href="">thumbs up</a>
                     </button>
-
-                     <button class="btn btn-sm" type="submit"><a href="{% url 'comment' caption.id %}"><i
-                            class="far fa-comment hearticon mx-auto" aria-hidden="true"></i>
-                    </a></button>
+                        <a class="btn btn-outline-primary" type="submit" href="{% url 'comment' caption.id %}">comment</a>
                 </div>
-                <span class="ml-4 mb-1"><strong>{{caption.likes.count}} like{{caption.likes.count|pluralize}}</strong></span>
-                <span class="text-secondary ml-4 viewall"><a href="{% url 'comment' caption.id %}">view all {{caption.comments.count}} comments{{image.comments.count|pluralize}}</a></span>
-                <div class="allcomments mb-4">
+                <div class="card" style="margin-bottom:20px;">
+                <span class="card-footer text-secondary ml-4 viewall"><a href="{% url 'comment' caption.id %}">view all {{caption.comments.count}} comments{{image.comments.count|pluralize}}</a></span>
+                <p class="card-text ml-4 mb-1"><strong>{{caption.likes.count}} like{{caption.likes.count|pluralize}}</strong></p>
+
+                <div class="card-footer allcomments mb-4" >
                     {% for comment in caption.comments.all|slice:'2' %}
                     <div class="comment">
                         <div class="ml-4"><strong>{{ comment.user.user.username }}</strong> <span
@@ -76,10 +75,8 @@
         </div>
         <div class="col-md-4 mt-4 userinfo">
             <div class="row">
-            </div>
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="card mt-4 mr-2 ml-2">
+                <div class="col-md-14" style="display:flex;float:left;">
+                    <div class="card">
                         <div class="card-title text-secondary mt-2 mr-2 ml-2 ">Suggestions</div>
                         {% for user in users %}
                         <div class="container">

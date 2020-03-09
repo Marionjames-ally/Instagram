@@ -9,6 +9,6 @@ urlpatterns = [
     path('profile/', views.profile, name="profile"),
     path('',views.home, name='home'),
     path('', views.signout, {"next_page": '/'},name="signout"),
-    path('profile/', views.profile,name = "profile"), 
-    path('comment/<int:pk>/',views.post_comment,name = 'comment')
+    path('profile/<id>/', views.profile,name = "profile"), 
+    path('comment/<id>',views.post_comment,name = 'comment')
 ]

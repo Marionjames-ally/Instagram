@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate,login ,logout 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -50,8 +50,8 @@ def signup(request):
         return render(request, 'registration/registration_form.html', {'form': form})
 
 def signin(request):
-    if request.user.is_authenticated:
-        return render(request, 'insta-templates/instagram.html')
+    # if request.user.is_authenticated:
+    #     return render(request, 'registration/login.html', {'form': form}')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -61,7 +61,7 @@ def signin(request):
             return redirect('instagram')
         else:
             form = AuthenticationForm(request.POST)
-            return render(request, 'registration/login.html', {'form': form})
+            return redirect(request, 'registration/login.html', {'form': form})
     else:
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
@@ -70,11 +70,11 @@ def signin(request):
 def signout(request):
         logout(request)
 
-        return redirect('home')
+        return redirect('login')
    
         
 @login_required(login_url='login')
-def profile(request):
+def profile(request, id):
     current_user = request.user
     profile = Profile.objects.all()
 
@@ -100,8 +100,8 @@ def profile(request):
     return render(request, 'registration/profile.html',locals())
 
 @login_required(login_url='login')
-def post_comment(request, id, pk):
-    image = get_object_or_404(Caption, pk=id)
+def post_comment(request, id):
+    image = get_object_or_404(Caption, pk = id)
     is_liked = False
     if image.likes.filter(id=request.user.id).exists():
         is_liked = True
@@ -122,4 +122,4 @@ def post_comment(request, id, pk):
         'is_liked': is_liked,
         'total_likes': image.total_likes()
     }
-    return render(request, 'insta-templates/post.html', params)
+    return render(request, 'insta-templates/comment.html', params)

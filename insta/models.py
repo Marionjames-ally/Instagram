@@ -66,7 +66,7 @@ class Caption(models.Model):
     def __str__(self):
         return f'{self.user.name} Caption'
 class Comment(models.Model):
-    comment = models.TextField()
+    comment = models.TextField(max_length=60)
     post = models.ForeignKey(Caption, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comments')
     created = models.DateTimeField(auto_now_add=True, null=True)
