@@ -38,7 +38,7 @@
             </div>
 
             {% for caption in captions %}
-            <div class="card mb-6">
+            <div class="mb-6">
                 <div class="card-title">
                     <img src="{{caption.user.profile_picture.url}}" class="rounded-circle border ml-3 mt-2  mr-3"  width="35" height="35"> : <p>{{caption.user.user.username}}</p>
                     {% comment %} <a href="{% url 'uprofile' caption.user.user.username  %}" class="mt-4 user" style="text-decoration:none; color:black">{{caption.user.user.username|title}}</a> {% endcomment %}

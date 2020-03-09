@@ -54,7 +54,7 @@ def signin(request):
     #     return render(request, 'registration/login.html', {'form': form}')
     if request.method == 'POST':
         username = request.POST['username']
-        password = request.POST['password']
+        password = request.POST['password1']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
@@ -126,20 +126,28 @@ def post_comment(request, id):
 
 @login_required(login_url='login')
 def search_profile(request):
-    if 'user' in request.GET and request.GET['username']:
-        search_term = request.GET.get("username")
-        message = f"{search_term}"
+    if 'search_user' in request.GET and request.GET['search_user']:
+        name = request.GET.get("search_user")
 
-        searched_profile = User.search_profile(search_term)
-        searched_user = User.objects.filter(username=User)[0]
-        return render(request,'insta-templates/search.html')
+        trial = User.objects.filter(username=name)[0]
+        ids = trial.id
+        results = Profile.objects.filter(user_id=ids)
+
+        message = f'name'
+        params = {
+            'results': results,
+            'message': message
+        }
+        return render(request, 'insta-templates/search.html', params)
     else:
-         message=''   
-    return render(request, 'insta-templates/search.html', {'message':message})
+        message = ""
+
+
+    return render(request, 'insta-templates/search.html')
     
 
 @login_required(login_url='login')
-def user_profile(request, username):
+def user_profile(request, username, pk):
     user_prof = get_object_or_404(User, username=username)
     if request.user == user_prof:
         return redirect('profile')
@@ -159,4 +167,19 @@ def user_profile(request, username):
         'follow_status': follow_status
     }
     print(followers)
-    return render(request, 'all-pics/user-profile.html', params)
+    return render(request, 'insta-templates/user-profile.html', params)
+
+def unfollow(request, to_unfollow):
+    if request.method == 'GET':
+        user_profile2 = Profile.objects.get(pk=to_unfollow)
+        unfollow_d = Follow.objects.filter(follower=request.user.profile, followed=user_profile2)
+        unfollow_d.delete()
+        return redirect('user_profile', user_profile2.user.username)
+
+
+def follow(request, to_follow):
+    if request.method == 'GET':
+        user_profile3 = Profile.objects.get(pk=to_follow)
+        follow_s = Follow(follower=request.user.profile, followed=user_profile3)
+        follow_s.save()
+        return redirect('user_profile', user_profile3.user.username)
