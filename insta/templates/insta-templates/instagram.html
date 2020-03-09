@@ -18,6 +18,7 @@
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLongTitle">New Image</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <br>
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -43,24 +44,23 @@
                     {% comment %} <a href="{% url 'uprofile' caption.user.user.username  %}" class="mt-4 user" style="text-decoration:none; color:black">{{caption.user.user.username|title}}</a> {% endcomment %}
                 </div>
                 <div class="card-body mb-4">
-                     {% comment %} <a href="{% url 'comment' caption.id %}"> {% endcomment %}
-                        <div class="card-text" style="background-image:url({{ caption.image.url }});background-size: contain;position: sticky;">
-                            <img src="{{caption.image.url}}" style="" class="card-img" width="100%"/>
+                        <div class="card-text">
+                            <img src="{{caption.image.url}}" style="" class="card-img" width="100%"/><br><br><hr>
+                            <p class=card-text>{{caption.caption}}</p>
                         </div>
-                    {% comment %} </a>  {% endcomment %}
                 </div>
                 <div class="iconic ml-2">
                     <button class="btn btn-sm" type="submit" name="image_id" value="{{caption.id}}">
                         <a href=""><i class="far fa-heart hearticon mx-auto" aria-hidden="true" style=""></i></a>
                     </button>
 
-                    {% comment %} <button class="btn btn-sm" type="submit"><a href="{% url 'comment' caption.id %}"><i
+                     <button class="btn btn-sm" type="submit"><a href="{% url 'comment' caption.id %}"><i
                             class="far fa-comment hearticon mx-auto" aria-hidden="true"></i>
-                    </a></button> {% endcomment %}
+                    </a></button>
                 </div>
                 <span class="ml-4 mb-1"><strong>{{caption.likes.count}} like{{caption.likes.count|pluralize}}</strong></span>
-                {% comment %} <span class="text-secondary ml-4 viewall"><a href="{% url 'comment' caption.id %}">view all {{caption.comments.count}} comments{{image.comments.count|pluralize}}</a></span> {% endcomment %}
-                {% comment %} <div class="allcomments mb-4">
+                <span class="text-secondary ml-4 viewall"><a href="{% url 'comment' caption.id %}">view all {{caption.comments.count}} comments{{image.comments.count|pluralize}}</a></span>
+                <div class="allcomments mb-4">
                     {% for comment in caption.comments.all|slice:'2' %}
                     <div class="comment">
                         <div class="ml-4"><strong>{{ comment.user.user.username }}</strong> <span
@@ -70,7 +70,7 @@
                     {% empty %}
                     {% endfor %}
                     <p class="text-secondary ml-4">{{caption.created|timesince}}</p>
-                </div> {% endcomment %}
+                </div> 
             </div>
             {% endfor %}
         </div>

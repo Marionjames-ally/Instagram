@@ -35,6 +35,7 @@ class Profile(models.Model):
 
     def delete_profile(self):
         self.delete()
+
 class Caption(models.Model):
     image = CloudinaryField('image')
     name = models.CharField(max_length=250, blank=True)
@@ -46,8 +47,8 @@ class Caption(models.Model):
     class Meta:
         ordering = ["-pk"]
 
-    # def get_absolute_url(self):
-    #     return f"/post/{self.id}"
+    def get_absolute_url(self):
+        return f"/post/{self.id}"
 
     @property
     def get_all_comments(self):
@@ -64,3 +65,14 @@ class Caption(models.Model):
 
     def __str__(self):
         return f'{self.user.name} Caption'
+class Comment(models.Model):
+    comment = models.TextField()
+    post = models.ForeignKey(Caption, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comments')
+    created = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return f'{self.user.name} Post'
+
+    class Meta:
+        ordering = ["-pk"]
