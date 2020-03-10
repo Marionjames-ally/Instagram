@@ -43,11 +43,9 @@
         <div class="card">
             <div class="card-body parent ">
                 <div class="im">
-                <img src="{{image.image.url}}" alt="{{image.caption}}" class="card-img">
-                <p id="overlay"class="text"> 
-                    <i class="fas fa-heart" style="font-size: 18"></i> 
-                    <span style="">{{image.likes.count}}</span>
-                     <i class="fas fa-comment ml-4" style=""></i> <span style="">{{image.comments.count}}</span></p>
+                <img src="{{image.image.url}}" alt="{{image.caption}}" class="card-img"><br><hr>
+                <p id="overlay"class="btn btn-outline-success text">thumbs up<span style="">{{image.likes.count}}</span></p>
+                    <p class="btn btn-outline-primary">comment<span style="">{{image.comments.count}}</span></p>
             
                     </div>
                     </div>

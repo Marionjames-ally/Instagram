@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate,login ,logout 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from .forms import *
 
@@ -32,39 +32,35 @@ def instagram(request):
     return render(request, 'insta-templates/instagram.html',params)
 
 def signup(request):
-    # if request.user.is_authenticated:
-    #     return redirect('signup')
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            signin(request)
-            return redirect('/instagram')
-        else:
-            return render(request, 'registration/registration_form.html', {'form': form})
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
     else:
-        form = UserCreationForm()
-        return render(request, 'registration/registration_form.html', {'form': form})
+        form = SignUpForm()
+    return render(request, 'registration/registration_form.html', {'form': form})
 
-def signin(request):
+# def signin(request):
     # if request.user.is_authenticated:
     #     return render(request, 'registration/login.html', {'form': form}')
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password1']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('instagram')
-        else:
-            form = AuthenticationForm(request.POST)
-            return redirect(request, 'registration/login.html', {'form': form})
-    else:
-        form = AuthenticationForm()
-        return render(request, 'registration/login.html', {'form': form})
+    # if request.method == 'POST':
+    #     username = request.POST['username']
+    #     password = request.POST['password1']
+    #     user = authenticate(request, username=username, password=password)
+    #     if user is not None:
+    #         login(request, user)
+    #         return redirect('instagram')
+    #     else:
+    #         form = AuthenticationForm(request.POST)
+    #         return redirect(request, 'registration/login.html', {'form': form})
+    # else:
+    #     form = AuthenticationForm()
+    #     return render(request, 'registration/login.html', {'form': form})
 
 
 def signout(request):
@@ -177,7 +173,7 @@ def unfollow(request, to_unfollow):
         return redirect('user_profile', user_profile2.user.username)
 
 
-def follow(request, to_follow):
+def follow(request,pk,to_follow):
     if request.method == 'GET':
         user_profile3 = Profile.objects.get(pk=to_follow)
         follow_s = Follow(follower=request.user.profile, followed=user_profile3)
