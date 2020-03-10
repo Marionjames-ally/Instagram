@@ -7,12 +7,12 @@
     <div class="content-section">
         <div class="media">
             <div class="container">
-                    <div class="col-md-6">
+                    <div class="col-md-14">
                         <div class="row">
                             <div style="margin-right:50px;">
                                 <img width="200px" height="auto" src="{{user.profile.profile_picture.url}}" width="200rem" style="box-shadow:3px 3px 3px 10px solid black;">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-14">
                                 <div class="row" width="800px">
                                     <p class="mr-3" style="margin-right:20px;">{{ user.username }}</p>
                                     <p style="margin-right:20px;" class="btn mr-3 btn-sm btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-md">Edit Profile</p>
@@ -61,19 +61,19 @@
     <hr class="mt-4">
     <div class="card-columns">
         {% for image in images %}
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{image.image.url}}" alt="{{image.caption}}" class="card-img">
-                    <p id="overlay"class="text"> 
-                        <i class="fas fa-heart" style="font-size: 18"></i> 
-                        <span style="">{{image.likes.count}}</span>
-                        <i class="fas fa-comment ml-4" style=""></i> <span style="">{{image.comments.count}}</span>
-                    </p>
-                    
+        <div class="card">
+            <div class="card-body parent ">
+                <div class="im">
+                    <img src="{{image.image.url}}" alt="{{image.caption}}" class="card-img"><br><hr>
+                    <p id="overlay"class="text">like: <span style="">{{image.likes.count}}</span></p>
+                    <p><span style="">comments:{{image.comments.count}}</span></p>
+            
                 </div>
             </div>
+        </div>
+           
         {% endfor %}
     </div>
-</div>
+
 
 {% endblock %}

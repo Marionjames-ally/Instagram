@@ -43,12 +43,11 @@
         <div class="card">
             <div class="card-body parent ">
                 <div class="im">
-                <img src="{{image.image.url}}" alt="{{image.caption}}" class="card-img"><br><hr>
-                <p id="overlay"class="btn btn-outline-success text">like: <span style="">{{image.likes.count}}</span></p>
+                    <img src="{{image.image.url}}" alt="{{image.caption}}" class="card-img"><br><hr>
+                    <p id="overlay"class="btn btn-outline-success text">like: <span style="">{{image.likes.count}}</span></p>
                     <p><span style="">comments:{{image.comments.count}}</span></p>
-            
-                    </div>
-                    </div>
+                </div>
+            </div>
         </div>
         {% endfor %}
     </div>
