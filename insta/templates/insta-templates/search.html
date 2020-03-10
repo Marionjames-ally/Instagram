@@ -16,26 +16,15 @@
             </a>
             {% endif %}
             <hr>
-            {% if results %}
-        <p>{{results}}</p>
+            
             {% for user_profile in results %}
 
             <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <img src="{{user_profile.user.profile.profile_picture.url}}" alt=""
-                             class="rounded-circle border ml-3 mt-2  mr-3" width="55" height="55">
-                    </div>
-                    <div class="col-md-6 mt-2">
-                        <span><strong><a href="{% url 'user_profile' user_profile.user.username  %}">{{user_profile.user.username}}</a></strong></span><br>
-                        <span class="text-secondary">{{user_profile.user.profile.name}}</span>
-                    </div>
-                </div>
+                <img class="rounded-cirle" width="45">
+                <a href="{%url 'user_profile' username=user_profile.user.username %}">{{user_profile.user}}</a>
             </div>
-            <hr>
 
             {% endfor %}
-            {% endif %}
         <div class="col-md-3"></div>
     </div>
 

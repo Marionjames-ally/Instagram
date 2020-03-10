@@ -70,7 +70,7 @@ def signout(request):
    
         
 @login_required(login_url='login')
-def profile(request, id):
+def profile(request):
     current_user = request.user
     profile = Profile.objects.all()
 
@@ -122,10 +122,10 @@ def post_comment(request, id):
 
 @login_required(login_url='login')
 def search_profile(request):
-    if 'search_user' in request.GET and request.GET['search_user']:
-        name = request.GET.get("search_user")
+    if 'q' in request.GET and request.GET['q']:
+        name = request.GET.get("q")
 
-        trial = User.objects.filter(username=name)[0]
+        trial = User.objects.filter(username__icontains=name)[0]
         ids = trial.id
         results = Profile.objects.filter(user_id=ids)
 
@@ -143,7 +143,7 @@ def search_profile(request):
     
 
 @login_required(login_url='login')
-def user_profile(request, username, pk):
+def user_profile(request, username):
     user_prof = get_object_or_404(User, username=username)
     if request.user == user_prof:
         return redirect('profile')
@@ -165,17 +165,17 @@ def user_profile(request, username, pk):
     print(followers)
     return render(request, 'insta-templates/user-profile.html', params)
 
-def unfollow(request, to_unfollow):
+def unfollow(request,id):
     if request.method == 'GET':
-        user_profile2 = Profile.objects.get(pk=to_unfollow)
+        user_profile2 = Profile.objects.get(pk=id)
         unfollow_d = Follow.objects.filter(follower=request.user.profile, followed=user_profile2)
         unfollow_d.delete()
         return redirect('user_profile', user_profile2.user.username)
 
 
-def follow(request,pk,to_follow):
+def follow(request,id):
     if request.method == 'GET':
-        user_profile3 = Profile.objects.get(pk=to_follow)
+        user_profile3 = Profile.objects.get(pk=id)
         follow_s = Follow(follower=request.user.profile, followed=user_profile3)
         follow_s.save()
         return redirect('user_profile', user_profile3.user.username)
