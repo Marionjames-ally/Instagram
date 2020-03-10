@@ -63,6 +63,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 INSTALLED_APPS = [
     'insta',
     'bootstrap4',
+    'crispy_forms',
     'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
