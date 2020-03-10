@@ -61,6 +61,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 # Application definition
 
 INSTALLED_APPS = [
+    'insta'
     'bootstrap4',
     'cloudinary',
     'django.contrib.admin',
@@ -69,7 +70,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'news.apps.NewsConfig',
 ]
 
 MIDDLEWARE = [
