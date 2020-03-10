@@ -53,7 +53,7 @@ To contribute, Open an issue first if it is a major contribution, for minor issu
 ### in case of any problems encoutered with running the application send us an email at `
 `marionjames2018@gmail.com `
 
-##lisence
+## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![Database diagram](https://raw.githubusercontent.com/Marionjames-ally/Instagram/master/Screenshot%20from%202020-03-10%2008-52-46.png)
