@@ -1,6 +1,4 @@
 # Instagram
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 ## Description
 A python django framework app that resembles instagram that allows users to signup and thus login to the application,users can also follow each other like each others photos ,comment and update their profiles.
 
@@ -53,13 +51,9 @@ To contribute, Open an issue first if it is a major contribution, for minor issu
  Marion James
 
 ### in case of any problems encoutered with running the application send us an email at `
-```bash
-marionjames2018@gmail.com
-```
+`marionjames2018@gmail.com `
 
+##lisence
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-
-## License
-[LICENSE](LICENSE)
-
-
+![Database diagram](https://raw.githubusercontent.com/Marionjames-ally/Instagram/master/Screenshot%20from%202020-03-10%2008-52-46.png)
