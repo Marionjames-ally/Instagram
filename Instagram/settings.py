@@ -83,7 +83,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-ROOT_URLCONF = 'galleria.urls'
+ROOT_URLCONF = 'Instagram.urls'
 
 TEMPLATES = [
     {
