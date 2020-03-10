@@ -61,7 +61,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 # Application definition
 
 INSTALLED_APPS = [
-    'insta'
+    'insta',
     'bootstrap4',
     'cloudinary',
     'django.contrib.admin',
