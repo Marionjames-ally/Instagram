@@ -39,11 +39,12 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            login(request, user)
+            login(request, user)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             return redirect('index')
     else:
         form = SignUpForm()
     return render(request, 'registration/registration_form.html', {'form': form})
+
 
 # def signin(request):
     # if request.user.is_authenticated:
